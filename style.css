@@ -1,0 +1,280 @@
+/* =====================================================
+   Color palette: ocean blue + pink
+   ===================================================== */
+:root {
+  --ocean-dark: #05445E;    /* header, footer, sidebar background */
+  --ocean-mid: #189AB4;     /* secondary accents, table headers */
+  --ocean-light: #D4F1F4;   /* light backgrounds, skill tags */
+  --pink: #FF6F91;          /* buttons, hover states, highlights */
+  --pink-dark: #E8517A;     /* button hover */
+  --text-dark: #05445E;
+  --text-body: #333333;
+}
+
+/* =====================================================
+   Global reset & base styles
+   ===================================================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-dark);
+  background-color: #f7fbfc;
+}
+
+a {
+  color: inherit;
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.5rem;
+}
+
+/* =====================================================
+   STEP 1: Page layout using CSS Grid
+   ===================================================== */
+.page-grid {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: var(--ocean-dark);
+  color: #ffffff;
+  padding: 1.5rem 2rem;
+}
+
+.header p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: var(--ocean-dark);
+  color: #ffffff;
+  padding: 2rem;
+  position: relative;   /* anchors .contact-info's absolute positioning */
+  min-height: 90px;
+}
+
+.footer .copyright {
+  margin: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* =====================================================
+   STEP 2: Sidebar navigation using Flexbox
+   STEP 7: Resume button using position: absolute
+   ===================================================== */
+.sidebar {
+  grid-area: sidebar;
+  background-color: var(--ocean-dark);
+  color: #ffffff;
+  padding: 1.5rem 1rem;
+  position: relative;   /* anchors .resume-btn's absolute positioning */
+}
+
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.75rem;
+}
+
+.sidebar ul li a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: var(--pink);
+}
+
+.resume-btn {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1rem;
+  right: 1rem;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--pink);
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.resume-btn:hover {
+  background-color: var(--pink-dark);
+  transform: translateY(-2px);
+}
+
+/* =====================================================
+   Main content area (scrollable)
+   ===================================================== */
+.main-content {
+  grid-area: main;
+  padding: 2rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 90px);
+}
+
+/* =====================================================
+   STEP 3: Summary & Education/Experience styling
+   ===================================================== */
+#about h2,
+#education h2 {
+  color: var(--ocean-dark);
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--pink);
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.75rem;
+}
+
+#about p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0 0 2rem;
+}
+
+#education {
+  margin-bottom: 2rem;
+}
+
+#education table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+#education th,
+#education td {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #dcdde1;
+}
+
+#education th {
+  background-color: var(--ocean-light);
+}
+
+/* =====================================================
+   STEP 4: Skills section using Flexbox
+   ===================================================== */
+#skills {
+  margin-bottom: 2rem;
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.6rem;
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.skill-tag {
+  background-color: var(--ocean-light);
+  color: var(--ocean-dark);
+  padding: 0.4rem 0.9rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+}
+
+/* =====================================================
+   STEP 5: Projects section using Grid
+   BONUS: box-shadow on project cards
+   ===================================================== */
+#projects {
+  margin-bottom: 2rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.project-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.project-card img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+}
+
+.project-card h3 {
+  font-size: 1.1rem;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: #555555;
+  margin: 0;
+}
+
+/* =====================================================
+   STEP 6: Contact info positioning in the footer
+   ===================================================== */
+.contact-info {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.contact-info p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.contact-info a {
+  text-decoration: underline;
+}
+
+.contact-info a:hover {
+  color: var(--pink);
+}
